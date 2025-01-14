@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %} 
+
+{% block content %}
+
+{% if user.is_customer %}
+<a href="{% url 'basket_view' %}" class="btn btn-outline-primary btn-lg mb-4">
+  Basket
+</a>
+
+<a href="{% url 'purchase_history' %}" class="btn btn-outline-primary btn-lg mb-4">
+  Purchase History
+</a>
+{% endif %}
+
+{% if user.is_staff %}
+<a href="{% url 'staff_product_list' %}" class="btn btn-outline-primary btn-lg mb-4">
+  Manage Products
+</a>
+<a
+  href="{% url 'staff_basket_list' %}"
+  class="btn btn-outline-primary btn-lg mb-4"
+  >Customer's Basket List</a
+>
+<a href="{% url 'customer_information' %}" class="btn btn-outline-primary btn-lg mb-4">
+  Customer Information
+</a>
+{% endif %}
+
+<h1 class="mb-4">Product List</h1>
+<div class="row">
+  {% for product in products %}
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">${{ product.price }}</p>
+
+        {% comment %} Start of Add to Basket Button {% endcomment %}
+        {% if user.is_customer %}
+        <a href="{% url 'add_to_basket' product.id %}" class="btn btn-primary"
+          >Add to Basket</a
+        >
+        {% endif %}
+        {% comment %} End of Add to Basket Button {% endcomment %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

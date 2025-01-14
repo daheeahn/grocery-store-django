@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %} {% block content %}
+
+<a href="{% url 'product_list' %}" class="btn btn-outline-primary btn-lg mb-4">
+  Back
+</a>
+
+<h1 class="mb-4">Manage Products</h1>
+<div class="d-flex justify-content-end mb-3">
+  <a href="{% url 'add_product' %}" class="btn btn-success">Add New Product</a>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Product Name</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>${{ product.price }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

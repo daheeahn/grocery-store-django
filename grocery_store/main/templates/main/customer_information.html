@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<a href="{% url 'product_list' %}" class="btn btn-outline-primary btn-lg mb-4">Back</a>
+
+<h1 class="mb-4">Customer Information</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Purchase History</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer, histories in purchase_histories.items %}
+        <tr>
+            <td>{{ customer.username }}</td>
+            <td>
+                <ul>
+                    {% for history in histories %}
+                    <li>{{ history.get_products }} / ${{ history.get_total_price }} / {{ history.purchased_at }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

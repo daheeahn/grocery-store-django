@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %} {% block content %}
+
+<a href="{% url 'product_list' %}" class="btn btn-outline-primary btn-lg mb-4">
+  Back
+</a>
+
+<h1 class="mb-4">Pending Baskets</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Products</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for basket in baskets %}
+    <tr>
+      <td>{{ basket.customer.username }}</td>
+      <td>
+        <ul>
+          {% for product in basket.product.all %}
+          <li>{{ product.name }} - ${{ product.price }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+      <td>{{ basket.status }}</td>
+      <td>
+        <a href="{% url 'approve_basket' basket.id %}" class="btn btn-success"
+          >Approve</a
+        >
+        <a href="{% url 'deny_basket' basket.id %}" class="btn btn-danger"
+          >Deny</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
