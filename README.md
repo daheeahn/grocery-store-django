@@ -1,3 +1,5 @@
+# Requirements
+
 Create a Django application for a grocery store. The store requires their application to have the following options:
 
 - customers and staff login. Admin can login using Django admin panel.
