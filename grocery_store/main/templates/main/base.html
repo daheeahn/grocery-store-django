@@ -35,7 +35,6 @@
           <ul class="navbar-nav ms-auto">
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <!-- POST 요청으로 로그아웃 -->
               <form
                 method="post"
                 action="{% url 'logout' %}"
